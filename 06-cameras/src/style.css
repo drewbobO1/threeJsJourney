@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/**
+* This is necessary if controls aren't enabled
+* in order to prevent scroll w trackpads
+*/
+html,
+body {
+  overflow: hidden;
+}
+
+/**
+* Setting outline to none is required for some browsers that highlight the canvas on drag and drops
+*/
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
