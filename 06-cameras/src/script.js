@@ -11,17 +11,19 @@ const cursor = {
 };
 
 window.addEventListener("mousemove", (event) => {
-  //   console.log(event.clientX);
-  //   cursor.x = event.clientX;
-  //   cursor.y = event.clientY;
   cursor.x = event.clientX / sizes.width - 0.5;
   cursor.y = -(event.clientY / sizes.height - 0.5);
-  //   const cursorXPercentage = Math.floor(cursorXDecimal * 100);
-  //   const cursorYPercentage = Math.floor(cursorYDecimal * 100);
+});
 
-  //   console.log(
-  //     `cursorXPercentage: ${cursorXPercentage}\ncursorYPercentage: ${cursorYPercentage}`,
-  //   );
+window.addEventListener("resize", () => {
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
 /**
@@ -62,6 +64,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // Animate
 const clock = new THREE.Clock();
