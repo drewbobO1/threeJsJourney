@@ -14,18 +14,19 @@ const scene = new THREE.Scene();
 // const geometry = new THREE.BoxGeometry(1, 1, 1, 4, 4, 4);
 
 // Custom geometry
+// First we create a buffer geometry
 const geometry = new THREE.BufferGeometry();
 
-const count = 50;
-const pointsArray = new Float32Array(count * 3 * 3);
+const length = 50;
+const verticesPointsArr = new Float32Array(length * 3 * 3);
 
-for (let i = 0; i < count * 3 * 3; i++) {
-  const randomNum = (Math.random() - 0.5) * 2;
-  pointsArray[i] = randomNum;
+for (let i = 0; i < length * 3 * 3; i++) {
+  const randomVal = (Math.random() - 0.5) * 2;
+  verticesPointsArr[i] = randomVal;
 }
 
-const pointsAttribute = new THREE.BufferAttribute(pointsArray, 3);
-geometry.setAttribute("position", pointsAttribute);
+const attribute = new THREE.BufferAttribute(verticesPointsArr, 3);
+geometry.setAttribute("position", attribute);
 
 const material = new THREE.MeshBasicMaterial({
   color: 0xff0000,
