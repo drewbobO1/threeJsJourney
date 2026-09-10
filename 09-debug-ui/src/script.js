@@ -23,9 +23,12 @@ const scene = new THREE.Scene();
  */
 debugObject.color = "#3ba9ab"
 
-const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-const material = new THREE.MeshBasicMaterial({ color: debugObject.color });
-const mesh = new THREE.Mesh(geometry, material);
+let geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
+const material = new THREE.MeshBasicMaterial({ 
+    color: debugObject.color,
+    wireframe: true 
+});
+let mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 /**
@@ -65,6 +68,19 @@ debugObject.spin = () => {
 
 gui
     .add(debugObject, 'spin')
+
+debugObject.subdivision = 2;
+gui
+    .add(debugObject, 'subdivision')
+    .min(1)
+    .max(20)
+    .step(1)
+    .onChange(() => {
+        scene.remove(mesh);
+        geometry = new THREE.BoxGeometry(1, 1, 1, debugObject.subdivision, debugObject.subdivision, debugObject.subdivision);
+        mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+    });
 
 /**
  * Sizes
