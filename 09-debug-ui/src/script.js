@@ -7,6 +7,7 @@ import GUI from "lil-gui";
  * Debug
  */
 const gui = new GUI();
+const debugObject = {};
 
 /**
  * Base
@@ -20,8 +21,10 @@ const scene = new THREE.Scene();
 /**
  * Object
  */
+debugObject.color = "#3ba9ab"
+
 const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-const material = new THREE.MeshBasicMaterial({ color: "#ca80e5" });
+const material = new THREE.MeshBasicMaterial({ color: debugObject.color });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
@@ -48,8 +51,20 @@ gui
     .add(material, 'wireframe');
 
 gui
-    .addColor(material, 'color');
+    .addColor(debugObject, 'color')
+    .onChange(() => {
+        material.color.set(debugObject.color);
+    });
 
+/**
+ * Spin animation
+ */
+debugObject.spin = () => {
+    gsap.to(mesh.rotation, {y: mesh.rotation.y + Math.PI * 2});
+}
+
+gui
+    .add(debugObject, 'spin')
 
 /**
  * Sizes
