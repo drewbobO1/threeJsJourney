@@ -6,17 +6,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
  */
 import minecraft from "../static/textures/minecraft.png"
 
-const image = new Image();
-const texture = new THREE.Texture(image);
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load(minecraft);
 texture.colorSpace = THREE.SRGBColorSpace;
-
-image.onload = () => {
-    texture.needsUpdate = true;
-}
-
-image.src = minecraft;
-
-console.log(image.src);
 
 /**
  * Base
