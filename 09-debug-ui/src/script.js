@@ -6,7 +6,23 @@ import GUI from "lil-gui";
 /**
  * Debug
  */
-const gui = new GUI();
+const gui = new GUI({
+    width: 340,
+    title: "Tweaker City",
+    closeFolders: false,
+
+});
+// Close by default (just like the folders below)
+// gui.close();
+
+// Toggle display of tweak panel.
+window.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyH') {
+        gui.show(gui._hidden);
+    }
+})
+
+
 const debugObject = {};
 
 /**
