@@ -23,12 +23,12 @@ const scene = new THREE.Scene();
  */
 debugObject.color = "#3ba9ab"
 
-let geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
+const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
 const material = new THREE.MeshBasicMaterial({ 
     color: debugObject.color,
     wireframe: true 
 });
-let mesh = new THREE.Mesh(geometry, material);
+const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 /**
@@ -75,11 +75,12 @@ gui
     .min(1)
     .max(20)
     .step(1)
-    .onChange(() => {
-        scene.remove(mesh);
-        geometry = new THREE.BoxGeometry(1, 1, 1, debugObject.subdivision, debugObject.subdivision, debugObject.subdivision);
-        mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
+    .onFinishChange(() => {
+        mesh.geometry.dispose();
+        mesh.geometry = new THREE.BoxGeometry(
+            1, 1, 1, 
+            debugObject.subdivision, debugObject.subdivision, debugObject.subdivision
+        );
     });
 
 /**
