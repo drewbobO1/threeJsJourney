@@ -40,20 +40,25 @@ scene.add(mesh);
 // Less gross way
 // gui.add(mesh.position, "y").min(-3).max(3).step(0.01);
 
+const cubeTweakerFolder = gui.addFolder('Main Tweaker');
+
+// If we want the folder closed by default.
+// cubeTweakerFolder.close();
+
 // Least gross way
-gui
+cubeTweakerFolder
     .add(mesh.position, "y")
     .min(-3)
     .max(3)
     .step(0.01);
 
-gui
+cubeTweakerFolder
     .add(mesh, 'visible');
 
-gui
+cubeTweakerFolder
     .add(material, 'wireframe');
 
-gui
+cubeTweakerFolder
     .addColor(debugObject, 'color')
     .onChange(() => {
         material.color.set(debugObject.color);
@@ -66,11 +71,11 @@ debugObject.spin = () => {
     gsap.to(mesh.rotation, {y: mesh.rotation.y + Math.PI * 2});
 }
 
-gui
+cubeTweakerFolder
     .add(debugObject, 'spin')
 
 debugObject.subdivision = 2;
-gui
+cubeTweakerFolder
     .add(debugObject, 'subdivision')
     .min(1)
     .max(20)
