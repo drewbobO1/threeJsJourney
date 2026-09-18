@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
  * Textures
  */
 import minecraft from "../static/textures/minecraft.png"
+import colorDoor from "../static/textures/door/color.jpg"
 
 const loadingManager = new THREE.LoadingManager();
 loadingManager.onStart = () => {
@@ -20,14 +21,19 @@ loadingManager.onError = () => {
     console.log("Error occurred");
 }
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const colorTexture = textureLoader.load(minecraft);
+const colorTexture = textureLoader.load(colorDoor);
 colorTexture.colorSpace = THREE.SRGBColorSpace;
-const alphaTexture = textureLoader.load('/textures/door/alpha.jpg')
-const heightTexture = textureLoader.load('/textures/door/height.jpg')
-const normalTexture = textureLoader.load('/textures/door/normal.jpg')
-const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
-const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
-const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+// colorTexture.repeat.x = 2;
+// colorTexture.repeat.y = 2;
+// colorTexture.wrapS = THREE.RepeatWrapping;
+// colorTexture.wrapT = THREE.RepeatWrapping;
+
+// colorTexture.offset.x = 0.5;
+// colorTexture.offset.y = 0.5;
+
+colorTexture.rotation = Math.PI * 0.25;
+colorTexture.center.x = 0.5;
+colorTexture.center.y = 0.5;
 
 /**
  * Base
