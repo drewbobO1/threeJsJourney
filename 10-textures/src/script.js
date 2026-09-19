@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
  */
 import minecraft from "../static/textures/minecraft.png"
 import colorDoor from "../static/textures/door/color.jpg"
+import checkerTexture from "../static/textures/checkerboard-8x8.png"
 
 const loadingManager = new THREE.LoadingManager();
 loadingManager.onStart = () => {
@@ -21,7 +22,7 @@ loadingManager.onError = () => {
     console.log("Error occurred");
 }
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const colorTexture = textureLoader.load(colorDoor);
+const colorTexture = textureLoader.load(checkerTexture);
 colorTexture.colorSpace = THREE.SRGBColorSpace;
 // colorTexture.repeat.x = 2;
 // colorTexture.repeat.y = 2;
@@ -31,9 +32,12 @@ colorTexture.colorSpace = THREE.SRGBColorSpace;
 // colorTexture.offset.x = 0.5;
 // colorTexture.offset.y = 0.5;
 
-colorTexture.rotation = Math.PI * 0.25;
-colorTexture.center.x = 0.5;
-colorTexture.center.y = 0.5;
+// colorTexture.rotation = Math.PI * 0.25;
+// colorTexture.center.x = 0.5;
+// colorTexture.center.y = 0.5;
+
+/** Filters & mipmapping heh */
+colorTexture.minFilter = THREE.NearestFilter
 
 /**
  * Base
