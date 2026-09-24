@@ -22,8 +22,8 @@ const doorHeightTexture = textureLoader.load("./textures/door/height.jpg");
 const doorMetalnessTexture = textureLoader.load("./textures/door/metalness.jpg");
 const doorNormalTexture = textureLoader.load("./textures/door/normal.jpg");
 const doorRoughnessTexture = textureLoader.load("./textures/door/roughness.jpg");
-const matcapOneTexture = textureLoader.load("./textures/gradients/3.jpg");
-const gradientOneTexture = textureLoader.load("./textures/matcaps/1.png");
+const matcapOneTexture = textureLoader.load("./textures/matcaps/8.png");
+const gradientOneTexture = textureLoader.load("./textures/gradients/3.jpg");
 
 
 loadingManager.onProgress = (url) => {
@@ -53,20 +53,24 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 // basicMaterial.side = THREE.DoubleSide;
 
 // === MeshNormalMaterial ===
-const normalMaterial = new THREE.MeshNormalMaterial();
-normalMaterial.flatShading = true;
+// const normalMaterial = new THREE.MeshNormalMaterial();
+// normalMaterial.flatShading = true;
+
+// === MeshMatcapMaterial ===
+const matcapMaterial = new THREE.MeshMatcapMaterial();
+matcapMaterial.matcap = matcapOneTexture;
 
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16), 
-    normalMaterial
+    matcapMaterial
 );
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1), 
-    normalMaterial
+    matcapMaterial
 );
 const torusMesh = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
-    normalMaterial
+    matcapMaterial
 );
 
 sphereMesh.position.x = -1.5;
