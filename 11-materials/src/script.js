@@ -90,9 +90,15 @@ const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
 
+    // Rotate meshes for sake of viewing material change(s)
     sphereMesh.rotation.y = elapsedTime * 0.1;
     planeMesh.rotation.y = elapsedTime * 0.1;
     torusMesh.rotation.y = elapsedTime * 0.1;
+
+    sphereMesh.rotation.x = elapsedTime * - 0.15;
+    planeMesh.rotation.x = elapsedTime * - 0.15;
+    torusMesh.rotation.x = elapsedTime * - 0.15;
+    
 
     // Update controls
     controls.update()
