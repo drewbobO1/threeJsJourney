@@ -18,6 +18,27 @@ const sizes = {
     height: window.innerHeight
 }
 
+/**
+ * Meshes
+ */
+const geometry = new THREE.BufferGeometry();
+
+const sphereGeometry = new THREE.SphereGeometry();
+const planeGeometry = new THREE.PlaneGeometry();
+const torusGeometry = new THREE.TorusGeometry();
+
+const basicMaterial = new THREE.MeshBasicMaterial();
+basicMaterial.color.set("#049ef4");
+
+const sphereMesh = new THREE.Mesh(sphereGeometry, basicMaterial);
+const planeMesh = new THREE.Mesh(planeGeometry, basicMaterial);
+const torusMesh = new THREE.Mesh(torusGeometry, basicMaterial);
+
+sphereMesh.position.x = -2;
+torusMesh.position.x = 2;
+
+scene.add(sphereMesh, planeMesh, torusMesh);
+
 window.addEventListener('resize', () =>
 {
     // Update sizes
