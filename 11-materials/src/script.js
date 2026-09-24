@@ -35,6 +35,30 @@ torusMesh.position.x = 1.5;
 scene.add(sphereMesh, planeMesh, torusMesh);
 
 /**
+ * Textures
+ */
+const loadingManager = new THREE.LoadingManager();
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const alphaDoorTexture = textureLoader.load("../static/textures/door/alpha.jpg");
+const ambientDoorTexture = textureLoader.load("../static/textures/door/ambientOcclusion.jpg");
+const colorDoorTexture = textureLoader.load("../static/textures/door/color.jpg");
+const heightDoorTexture = textureLoader.load("../static/textures/door/height.jpg");
+const metalnessDoorTexture = textureLoader.load("../static/textures/door/metalness.jpg");
+const normalDoorTexture = textureLoader.load("../static/textures/door/normal.jpg");
+const roughnessDoorTexture = textureLoader.load("../static/textures/door/roughness.jpg");
+
+const matcapOneTexture = textureLoader.load("../static/textures/gradients/3.jpg");
+const gradientOneTexture = textureLoader.load("../static/textures/matcaps/1.png");
+
+loadingManager.onProgress = () => {
+    console.log("Loaded a thing");
+}
+loadingManager.onLoad = () => {
+    console.log("Everything loaded!");
+}
+
+
+/**
  * Sizes
  */
 const sizes = {
