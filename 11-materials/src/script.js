@@ -3,12 +3,35 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Base
- */
+*/
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
+/**
+ * Textures
+ */
+const loadingManager = new THREE.LoadingManager();
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const doorAlphaTexture = textureLoader.load("../static/textures/door/alpha.jpg");
+const doorAmbientTexture = textureLoader.load("../static/textures/door/ambientOcclusion.jpg");
+const doorColorTexture = textureLoader.load("../static/textures/door/color.jpg");
+const doorHeightTexture = textureLoader.load("../static/textures/door/height.jpg");
+const doorMetalnessTexture = textureLoader.load("../static/textures/door/metalness.jpg");
+const doorNormalTexture = textureLoader.load("../static/textures/door/normal.jpg");
+const doorRoughnessTexture = textureLoader.load("../static/textures/door/roughness.jpg");
+
+const matcapOneTexture = textureLoader.load("../static/textures/gradients/3.jpg");
+const gradientOneTexture = textureLoader.load("../static/textures/matcaps/1.png");
+
+loadingManager.onProgress = () => {
+    console.log("Loaded a thing");
+}
+loadingManager.onLoad = () => {
+    console.log("Everything loaded!");
+}
 
 /**
  * Meshes
@@ -34,28 +57,6 @@ torusMesh.position.x = 1.5;
 
 scene.add(sphereMesh, planeMesh, torusMesh);
 
-/**
- * Textures
- */
-const loadingManager = new THREE.LoadingManager();
-const textureLoader = new THREE.TextureLoader(loadingManager);
-const alphaDoorTexture = textureLoader.load("../static/textures/door/alpha.jpg");
-const ambientDoorTexture = textureLoader.load("../static/textures/door/ambientOcclusion.jpg");
-const colorDoorTexture = textureLoader.load("../static/textures/door/color.jpg");
-const heightDoorTexture = textureLoader.load("../static/textures/door/height.jpg");
-const metalnessDoorTexture = textureLoader.load("../static/textures/door/metalness.jpg");
-const normalDoorTexture = textureLoader.load("../static/textures/door/normal.jpg");
-const roughnessDoorTexture = textureLoader.load("../static/textures/door/roughness.jpg");
-
-const matcapOneTexture = textureLoader.load("../static/textures/gradients/3.jpg");
-const gradientOneTexture = textureLoader.load("../static/textures/matcaps/1.png");
-
-loadingManager.onProgress = () => {
-    console.log("Loaded a thing");
-}
-loadingManager.onLoad = () => {
-    console.log("Everything loaded!");
-}
 
 
 /**
