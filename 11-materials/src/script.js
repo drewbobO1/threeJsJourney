@@ -15,29 +15,35 @@ const scene = new THREE.Scene()
  */
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const doorAlphaTexture = textureLoader.load("../static/textures/door/alpha.jpg");
-const doorAmbientTexture = textureLoader.load("../static/textures/door/ambientOcclusion.jpg");
-const doorColorTexture = textureLoader.load("../static/textures/door/color.jpg");
-const doorHeightTexture = textureLoader.load("../static/textures/door/height.jpg");
-const doorMetalnessTexture = textureLoader.load("../static/textures/door/metalness.jpg");
-const doorNormalTexture = textureLoader.load("../static/textures/door/normal.jpg");
-const doorRoughnessTexture = textureLoader.load("../static/textures/door/roughness.jpg");
+const doorAlphaTexture = textureLoader.load("./textures/door/alpha.jpg");
+const doorAmbientTexture = textureLoader.load("./textures/door/ambientOcclusion.jpg");
+const doorColorTexture = textureLoader.load("./textures/door/color.jpg");
+const doorHeightTexture = textureLoader.load("./textures/door/height.jpg");
+const doorMetalnessTexture = textureLoader.load("./textures/door/metalness.jpg");
+const doorNormalTexture = textureLoader.load("./textures/door/normal.jpg");
+const doorRoughnessTexture = textureLoader.load("./textures/door/roughness.jpg");
+const matcapOneTexture = textureLoader.load("./textures/gradients/3.jpg");
+const gradientOneTexture = textureLoader.load("./textures/matcaps/1.png");
 
-const matcapOneTexture = textureLoader.load("../static/textures/gradients/3.jpg");
-const gradientOneTexture = textureLoader.load("../static/textures/matcaps/1.png");
 
-loadingManager.onProgress = () => {
-    console.log("Loaded a thing");
+loadingManager.onProgress = (url) => {
+    console.log("Loaded:", url);
+}
+loadingManager.onError = (e) => {
+    console.log("Error loading:", e);
 }
 loadingManager.onLoad = () => {
     console.log("Everything loaded!");
 }
 
+doorColorTexture.colorSpace = THREE.SRGBColorSpace;
+matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
+
 /**
  * Meshes
  */
-const basicMaterial = new THREE.MeshBasicMaterial();
-basicMaterial.color.set("#049ef4");
+const basicMaterial = new THREE.MeshBasicMaterial({ map: doorColorTexture });
+// basicMaterial.color.set("#049ef4");
 
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16), 
