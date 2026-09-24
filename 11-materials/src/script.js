@@ -42,20 +42,31 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 /**
  * Meshes
  */
-const basicMaterial = new THREE.MeshBasicMaterial({ map: doorColorTexture });
-// basicMaterial.color.set("#049ef4");
+// === MeshBasicMaterial ===
+// const basicMaterial = new THREE.MeshBasicMaterial();
+// basicMaterial.map = doorColorTexture;                   // Better, cleaner way of setting map texture.
+// basicMaterial.color = new THREE.Color("#049ef4");
+// basicMaterial.wireframe = true;
+// basicMaterial.transparent = true;
+// basicMaterial.opacity = 0.5;
+// basicMaterial.alphaMap = doorAlphaTexture;
+// basicMaterial.side = THREE.DoubleSide;
+
+// === MeshNormalMaterial ===
+const normalMaterial = new THREE.MeshNormalMaterial();
+normalMaterial.flatShading = true;
 
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16), 
-    basicMaterial
+    normalMaterial
 );
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1), 
-    basicMaterial
+    normalMaterial
 );
 const torusMesh = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
-    basicMaterial
+    normalMaterial
 );
 
 sphereMesh.position.x = -1.5;
