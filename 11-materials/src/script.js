@@ -11,6 +11,30 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
+ * Meshes
+ */
+const basicMaterial = new THREE.MeshBasicMaterial();
+basicMaterial.color.set("#049ef4");
+
+const sphereMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, 16, 16), 
+    basicMaterial
+);
+const planeMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1), 
+    basicMaterial
+);
+const torusMesh = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
+    basicMaterial
+);
+
+sphereMesh.position.x = -1.5;
+torusMesh.position.x = 1.5;
+
+scene.add(sphereMesh, planeMesh, torusMesh);
+
+/**
  * Sizes
  */
 const sizes = {
@@ -18,26 +42,6 @@ const sizes = {
     height: window.innerHeight
 }
 
-/**
- * Meshes
- */
-const geometry = new THREE.BufferGeometry();
-
-const sphereGeometry = new THREE.SphereGeometry();
-const planeGeometry = new THREE.PlaneGeometry();
-const torusGeometry = new THREE.TorusGeometry();
-
-const basicMaterial = new THREE.MeshBasicMaterial();
-basicMaterial.color.set("#049ef4");
-
-const sphereMesh = new THREE.Mesh(sphereGeometry, basicMaterial);
-const planeMesh = new THREE.Mesh(planeGeometry, basicMaterial);
-const torusMesh = new THREE.Mesh(torusGeometry, basicMaterial);
-
-sphereMesh.position.x = -2;
-torusMesh.position.x = 2;
-
-scene.add(sphereMesh, planeMesh, torusMesh);
 
 window.addEventListener('resize', () =>
 {
