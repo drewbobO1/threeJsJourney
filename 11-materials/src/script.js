@@ -89,8 +89,8 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 // === MeshStandardMaterial ===
 const standardMaterial = new THREE.MeshStandardMaterial();
 
-gui.add(standardMaterial, "metalness", 0, 3, .1);
-gui.add(standardMaterial, "roughness", -1, 1, .1);
+gui.add(standardMaterial, "metalness").min(0).max(1).step(0.0001);
+gui.add(standardMaterial, "roughness").min(0).max(1).step(0.0001);
 
 
 
