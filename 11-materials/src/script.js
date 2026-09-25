@@ -60,17 +60,25 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 const matcapMaterial = new THREE.MeshMatcapMaterial();
 matcapMaterial.matcap = matcapOneTexture;
 
+// === MeshDepthMaterial ===
+const depthMaterial = new THREE.MeshDepthMaterial();
+
+// === MeshLambertMaterial ===
+const lambertMaterial = new THREE.MeshLambertMaterial();
+
+
+
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16), 
-    matcapMaterial
+    lambertMaterial
 );
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1), 
-    matcapMaterial
+    lambertMaterial
 );
 const torusMesh = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
-    matcapMaterial
+    lambertMaterial
 );
 
 sphereMesh.position.x = -1.5;
@@ -78,7 +86,17 @@ torusMesh.position.x = 1.5;
 
 scene.add(sphereMesh, planeMesh, torusMesh);
 
+/**
+ * Lights!!!!!!
+ * For MeshLambertMaterial (which requires lights to be visible)
+ */
+const ambientLight = new THREE.AmbientLight(new THREE.Color("#00ffff"), 1);
+const pointLight = new THREE.PointLight(new THREE.Color("#ff00ff"), 40);
+pointLight.position.x = 2;
+pointLight.position.y = 3;
+pointLight.position.z = 4;
 
+scene.add(ambientLight, pointLight);
 
 /**
  * Sizes
