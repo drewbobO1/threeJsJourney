@@ -1,5 +1,12 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import GUI from 'lil-gui';
+
+
+/**
+ * Debug GUI
+ */
+const gui = new GUI();
 
 /**
  * Base
@@ -72,25 +79,32 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 // phongMaterial.specular = new THREE.Color("#e57316");
 
 // === MeshToonMaterial ===
-const toonMaterial = new THREE.MeshToonMaterial();
-toonMaterial.gradientMap = gradientTexture;
-gradientTexture.minFilter = THREE.NearestFilter;
-gradientTexture.magFilter = THREE.NearestFilter;
-// Can disable mipmapping since NearestFilter doesn't ever use mipmapped versions of the texture
-gradientTexture.generateMipmaps = false;
+// const toonMaterial = new THREE.MeshToonMaterial();
+// toonMaterial.gradientMap = gradientTexture;
+// gradientTexture.minFilter = THREE.NearestFilter;
+// gradientTexture.magFilter = THREE.NearestFilter;
+// // Can disable mipmapping since NearestFilter doesn't ever use mipmapped versions of the texture
+// gradientTexture.generateMipmaps = false;
+
+// === MeshStandardMaterial ===
+const standardMaterial = new THREE.MeshStandardMaterial();
+
+gui.add(standardMaterial, "metalness", 0, 3, .1);
+gui.add(standardMaterial, "roughness", -1, 1, .1);
+
 
 
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16), 
-    toonMaterial
+    standardMaterial
 );
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1), 
-    toonMaterial
+    standardMaterial
 );
 const torusMesh = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
-    toonMaterial
+    standardMaterial
 );
 
 sphereMesh.position.x = -1.5;
