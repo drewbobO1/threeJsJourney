@@ -23,7 +23,7 @@ const doorMetalnessTexture = textureLoader.load("./textures/door/metalness.jpg")
 const doorNormalTexture = textureLoader.load("./textures/door/normal.jpg");
 const doorRoughnessTexture = textureLoader.load("./textures/door/roughness.jpg");
 const matcapOneTexture = textureLoader.load("./textures/matcaps/8.png");
-const gradientOneTexture = textureLoader.load("./textures/gradients/3.jpg");
+const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
 
 
 loadingManager.onProgress = (url) => {
@@ -57,28 +57,40 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 // normalMaterial.flatShading = true;
 
 // === MeshMatcapMaterial ===
-const matcapMaterial = new THREE.MeshMatcapMaterial();
-matcapMaterial.matcap = matcapOneTexture;
+// const matcapMaterial = new THREE.MeshMatcapMaterial();
+// matcapMaterial.matcap = matcapOneTexture;
 
 // === MeshDepthMaterial ===
-const depthMaterial = new THREE.MeshDepthMaterial();
+// const depthMaterial = new THREE.MeshDepthMaterial();
 
 // === MeshLambertMaterial ===
-const lambertMaterial = new THREE.MeshLambertMaterial();
+// const lambertMaterial = new THREE.MeshLambertMaterial();
 
+// === MeshPhongMaterial ===
+// const phongMaterial = new THREE.MeshPhongMaterial();
+// phongMaterial.shininess = 100;
+// phongMaterial.specular = new THREE.Color("#e57316");
+
+// === MeshToonMaterial ===
+const toonMaterial = new THREE.MeshToonMaterial();
+toonMaterial.gradientMap = gradientTexture;
+gradientTexture.minFilter = THREE.NearestFilter;
+gradientTexture.magFilter = THREE.NearestFilter;
+// Can disable mipmapping since NearestFilter doesn't ever use mipmapped versions of the texture
+gradientTexture.generateMipmaps = false;
 
 
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16), 
-    lambertMaterial
+    toonMaterial
 );
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1), 
-    lambertMaterial
+    toonMaterial
 );
 const torusMesh = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
-    lambertMaterial
+    toonMaterial
 );
 
 sphereMesh.position.x = -1.5;
