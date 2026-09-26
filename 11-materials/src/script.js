@@ -110,19 +110,19 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 
 // === MeshPhysicalMaterial ===
 const physicalMaterial = new THREE.MeshPhysicalMaterial();
-physicalMaterial.metalness = 1;
-physicalMaterial.roughness = 1;
-physicalMaterial.map = doorColorTexture;
-physicalMaterial.aoMap = doorAmbientTexture;
-physicalMaterial.aoMapIntensity = 1;
-physicalMaterial.displacementMap = doorHeightTexture;
-physicalMaterial.displacementScale = 0.1;
-physicalMaterial.metalnessMap = doorMetalnessTexture;
-physicalMaterial.roughnessMap = doorRoughnessTexture;
-physicalMaterial.normalMap = doorNormalTexture;
-physicalMaterial.normalScale.set(0.5, 0.5);
-physicalMaterial.transparent = true;
-physicalMaterial.alphaMap = doorAlphaTexture;
+physicalMaterial.metalness = 0;
+physicalMaterial.roughness = 0;
+// physicalMaterial.map = doorColorTexture;
+// physicalMaterial.aoMap = doorAmbientTexture;
+// physicalMaterial.aoMapIntensity = 1;
+// physicalMaterial.displacementMap = doorHeightTexture;
+// physicalMaterial.displacementScale = 0.1;
+// physicalMaterial.metalnessMap = doorMetalnessTexture;
+// physicalMaterial.roughnessMap = doorRoughnessTexture;
+// physicalMaterial.normalMap = doorNormalTexture;
+// physicalMaterial.normalScale.set(0.5, 0.5);
+// physicalMaterial.transparent = true;
+// physicalMaterial.alphaMap = doorAlphaTexture;
 
 gui.add(physicalMaterial, "metalness").min(0).max(1).step(0.0001);
 gui.add(physicalMaterial, "roughness").min(0).max(1).step(0.0001);
@@ -133,6 +133,35 @@ physicalMaterial.clearcoatRoughness = 0;
 
 gui.add(physicalMaterial, "clearcoat").min(0).max(1).step(0.0001);
 gui.add(physicalMaterial, "clearcoatRoughness").min(0).max(1).step(0.0001);
+
+// Sheen
+// physicalMaterial.sheen = 1;
+// physicalMaterial.sheenRoughness = 0.25;
+// physicalMaterial.sheenColor.set(new THREE.Color("#f4a30c"));
+
+// gui.add(physicalMaterial, "sheen").min(0).max(1).step(0.0001);
+// gui.add(physicalMaterial, "sheenRoughness").min(0).max(1).step(0.0001);
+// gui.addColor(physicalMaterial, "sheenColor");
+
+// // Iridescence
+// physicalMaterial.iridescence = 1;
+// physicalMaterial.iridescenceIOR = 1;
+// physicalMaterial.iridescenceThicknessRange = [ 100, 800 ];
+
+// gui.add(physicalMaterial, "iridescence").min(0).max(1).step(0.0001);
+// // Max of 2.333 is important here. Anything higher will start to create things that don't actually exist (or exist in real life).
+// gui.add(physicalMaterial, "iridescenceIOR").min(1).max(2.333).step(0.0001);
+// gui.add(physicalMaterial.iridescenceThicknessRange, '0').min(1).max(1000).step(1);
+// gui.add(physicalMaterial.iridescenceThicknessRange, '1').min(1).max(1000).step(1);
+
+// Transmission
+physicalMaterial.transmission = 1;
+physicalMaterial.ior = 1.5;
+physicalMaterial.thickness = 0.5;
+
+gui.add(physicalMaterial, "transmission").min(0).max(1).step(0.0001);
+gui.add(physicalMaterial, "ior").min(1).max(10).step(0.0001);
+gui.add(physicalMaterial, "thickness").min(0).max(1).step(0.0001);
 
 
 
