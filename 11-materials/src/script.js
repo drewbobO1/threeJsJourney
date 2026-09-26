@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+import { materialAO } from 'three/src/nodes/accessors/MaterialNode.js';
 // console.log(RGBELoader);
 
 
@@ -90,8 +91,21 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 
 // === MeshStandardMaterial ===
 const standardMaterial = new THREE.MeshStandardMaterial();
-standardMaterial.metalness = 0.7;
-standardMaterial.roughness = 0.2;
+standardMaterial.metalness = 1;
+standardMaterial.roughness = 1;
+standardMaterial.map = doorColorTexture;
+standardMaterial.aoMap = doorAmbientTexture;
+standardMaterial.aoMapIntensity = 1;
+standardMaterial.displacementMap = doorHeightTexture;
+standardMaterial.displacementScale = 0.1;
+standardMaterial.metalnessMap = doorMetalnessTexture;
+standardMaterial.roughnessMap = doorRoughnessTexture;
+standardMaterial.normalMap = doorNormalTexture;
+standardMaterial.normalScale.set(0.5, 0.5);
+standardMaterial.transparent = true;
+standardMaterial.alphaMap = doorAlphaTexture;
+
+
 
 gui.add(standardMaterial, "metalness").min(0).max(1).step(0.0001);
 gui.add(standardMaterial, "roughness").min(0).max(1).step(0.0001);
@@ -99,15 +113,15 @@ gui.add(standardMaterial, "roughness").min(0).max(1).step(0.0001);
 
 
 const sphereMesh = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 16, 16), 
+    new THREE.SphereGeometry(0.5, 64, 64), 
     standardMaterial
 );
 const planeMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1), 
+    new THREE.PlaneGeometry(1, 1, 100, 100), 
     standardMaterial
 );
 const torusMesh = new THREE.Mesh(
-    new THREE.TorusGeometry(0.3, 0.2, 16, 32), 
+    new THREE.TorusGeometry(0.3, 0.2, 64, 128), 
     standardMaterial
 );
 
