@@ -89,40 +89,64 @@ matcapOneTexture.colorSpace = THREE.SRGBColorSpace;
 // // Can disable mipmapping since NearestFilter doesn't ever use mipmapped versions of the texture
 // gradientTexture.generateMipmaps = false;
 
-// === MeshStandardMaterial ===
-const standardMaterial = new THREE.MeshStandardMaterial();
-standardMaterial.metalness = 1;
-standardMaterial.roughness = 1;
-standardMaterial.map = doorColorTexture;
-standardMaterial.aoMap = doorAmbientTexture;
-standardMaterial.aoMapIntensity = 1;
-standardMaterial.displacementMap = doorHeightTexture;
-standardMaterial.displacementScale = 0.1;
-standardMaterial.metalnessMap = doorMetalnessTexture;
-standardMaterial.roughnessMap = doorRoughnessTexture;
-standardMaterial.normalMap = doorNormalTexture;
-standardMaterial.normalScale.set(0.5, 0.5);
-standardMaterial.transparent = true;
-standardMaterial.alphaMap = doorAlphaTexture;
+// // === MeshStandardMaterial ===
+// const standardMaterial = new THREE.MeshStandardMaterial();
+// standardMaterial.metalness = 1;
+// standardMaterial.roughness = 1;
+// standardMaterial.map = doorColorTexture;
+// standardMaterial.aoMap = doorAmbientTexture;
+// standardMaterial.aoMapIntensity = 1;
+// standardMaterial.displacementMap = doorHeightTexture;
+// standardMaterial.displacementScale = 0.1;
+// standardMaterial.metalnessMap = doorMetalnessTexture;
+// standardMaterial.roughnessMap = doorRoughnessTexture;
+// standardMaterial.normalMap = doorNormalTexture;
+// standardMaterial.normalScale.set(0.5, 0.5);
+// standardMaterial.transparent = true;
+// standardMaterial.alphaMap = doorAlphaTexture;
 
+// gui.add(standardMaterial, "metalness").min(0).max(1).step(0.0001);
+// gui.add(standardMaterial, "roughness").min(0).max(1).step(0.0001);
 
+// === MeshPhysicalMaterial ===
+const physicalMaterial = new THREE.MeshPhysicalMaterial();
+physicalMaterial.metalness = 1;
+physicalMaterial.roughness = 1;
+physicalMaterial.map = doorColorTexture;
+physicalMaterial.aoMap = doorAmbientTexture;
+physicalMaterial.aoMapIntensity = 1;
+physicalMaterial.displacementMap = doorHeightTexture;
+physicalMaterial.displacementScale = 0.1;
+physicalMaterial.metalnessMap = doorMetalnessTexture;
+physicalMaterial.roughnessMap = doorRoughnessTexture;
+physicalMaterial.normalMap = doorNormalTexture;
+physicalMaterial.normalScale.set(0.5, 0.5);
+physicalMaterial.transparent = true;
+physicalMaterial.alphaMap = doorAlphaTexture;
 
-gui.add(standardMaterial, "metalness").min(0).max(1).step(0.0001);
-gui.add(standardMaterial, "roughness").min(0).max(1).step(0.0001);
+gui.add(physicalMaterial, "metalness").min(0).max(1).step(0.0001);
+gui.add(physicalMaterial, "roughness").min(0).max(1).step(0.0001);
+
+// Clearcoat
+physicalMaterial.clearcoat = 1;
+physicalMaterial.clearcoatRoughness = 0;
+
+gui.add(physicalMaterial, "clearcoat").min(0).max(1).step(0.0001);
+gui.add(physicalMaterial, "clearcoatRoughness").min(0).max(1).step(0.0001);
 
 
 
 const sphereMesh = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 64, 64), 
-    standardMaterial
+    physicalMaterial
 );
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1, 100, 100), 
-    standardMaterial
+    physicalMaterial
 );
 const torusMesh = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.2, 64, 128), 
-    standardMaterial
+    physicalMaterial
 );
 
 sphereMesh.position.x = -1.5;
