@@ -32,6 +32,8 @@ const fontLoader = new FontLoader();
 fontLoader.load(
     '/fonts/helvetiker_regular.typeface.json',
     (font) => {
+       const bevelThickness = 0.03;
+       const bevelSize = 0.02;
        const textGeometry = new TextGeometry(
             "my name is drewbob",
             {
@@ -40,18 +42,22 @@ fontLoader.load(
                 depth: 0.2,
                 curveSegments: 5,
                 bevelEnabled: true,
-                bevelThickness: 0.03,
-                bevelSize: 0.02,
+                bevelThickness: bevelThickness,
+                bevelSize: bevelSize,
                 bevelOffset: 0,
                 bevelSegments: 4
             }
         );
+        textGeometry.computeBoundingBox();
+        textGeometry.translate(
+            - (textGeometry.boundingBox.max.x - bevelSize) * 0.5,
+            - (textGeometry.boundingBox.max.y - bevelSize) * 0.5,
+            - (textGeometry.boundingBox.max.z - bevelThickness) * 0.5,
+        )
+
         const textMaterial = new THREE.MeshBasicMaterial({wireframe: true});
         const textMesh = new THREE.Mesh(textGeometry, textMaterial);
         scene.add(textMesh);
-
-
-        // gui.add(textGeometry.parameters, 'curveSegments');
     }
 )
 
