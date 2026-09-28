@@ -57,15 +57,16 @@ fontLoader.load(
             - (textGeometry.boundingBox.max.z - bevelThickness) * 0.5,
         )
 
-        const textMaterial = new THREE.MeshMatcapMaterial();
-        textMaterial.matcap = matcapTexture;
-        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+        material.matcap = matcapTexture;
+        const textMesh = new THREE.Mesh(textGeometry, material);
         scene.add(textMesh);
 
+        console.time('donuts');
+        const donutGeometry = new THREE.TorusGeometry();
+        
         for (let i = 0; i < 100; i++) {
-            const donutGeometry = new THREE.TorusGeometry();
-            const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
-            const donut = new THREE.Mesh(donutGeometry, donutMaterial);
+            const donut = new THREE.Mesh(donutGeometry, material);
             
             donut.position.x = (Math.random() - 0.5) * 20;
             donut.position.y = (Math.random() - 0.5) * 20;
@@ -79,6 +80,8 @@ fontLoader.load(
 
             scene.add(donut);
         }
+
+        console.timeEnd('donuts');
     }
 )
 
